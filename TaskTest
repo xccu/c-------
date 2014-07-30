@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using DataAccess;
+using Business;
+using test.Models;
+using Model;
+using System.Threading.Tasks;
+
+namespace test.Controllers
+{
+ public ActionResult TaskTest()
+        {            
+            var query = new Works();
+            //异步调用方法
+            Task<List<WorkInfo>> task = new Task<List<WorkInfo>>(() => WorkManager.GetWork());
+            task.Start();
+            var result = task.Result;
+            foreach (var item in result)
+            {
+                query.WorkList.Add(item);
+            }
+
+            return View(query);
+        }
+｝
