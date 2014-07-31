@@ -1,0 +1,18 @@
+ using System.Reflection;
+ 
+ public class HomeController : Controller
+    {       
+  public ActionResult Reflect()
+        {
+            StringBuilder sb = new StringBuilder();
+            StringWriter tw = new StringWriter(sb);
+            Assembly ass = Assembly.LoadFile(@"D:\MyXml\test\test\Model\obj\Debug\Model.dll");
+            Type type = ass.GetType("Model.WorkInfo");
+            object obj = ass.CreateInstance("Model.WorkInfo");
+            XmlSerializer sz = new XmlSerializer(type);
+            sz.Serialize(tw, obj);
+            tw.Close();
+            string result = sb.ToString();
+            return View();
+        }
+    ｝
