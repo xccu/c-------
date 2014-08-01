@@ -1,0 +1,17 @@
+  public void main()
+        {
+            StringBuilder sb = new StringBuilder();
+            StringWriter tw = new StringWriter(sb);
+            var work = new WorkInfo() 
+            {
+                id = 1,
+                name = "xxx",
+                workname = "a",
+                state = "finish"
+            };
+            Type type = work.GetType();
+            XmlSerializer sz = new XmlSerializer(typeof(WorkInfo));
+            FileStream stream = new FileStream(@"d:\test.xml", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            sz.Serialize(stream, work);
+            stream.Close();
+        }
