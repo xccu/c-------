@@ -1,6 +1,5 @@
         public static string JsonForm(string json)
         {
-            char a;
             string result = string.Empty;
             int[] tag = new int[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
             int t = 0;
@@ -43,7 +42,6 @@
                 }
                 if (result[result.Length - 1] == ']')
                 {
-                    a = result[result.Length - 3 - tag[t]];
                     if (result[result.Length - 3-tag[t]] == '[')
                     {
                         result = result.Substring(0, result.Length - 1);
