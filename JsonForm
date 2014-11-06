@@ -1,0 +1,45 @@
+  public static string JsonForm(string json)
+        {
+            string result = string.Empty;
+            int[] tag = new int[] { 0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
+            int t = 0;
+            foreach (var item in json)
+            {
+                result += item;
+                if (item == '{')
+                {
+                    t++;
+                    result += '\n';
+                    for (int i = 0; i < tag[t]; i++)
+                        result += " ";
+                }
+                if (item == ',')
+                {
+                    if (result[result.Length - 3 - tag[t]] != '}')
+                    {
+                        result += '\n';
+                        for (int i = 0; i < tag[t]; i++)
+                            result += " ";
+                    }
+                    else
+                    {
+                        result = result.Substring(0, result.Length - 3 - tag[t]);
+                        result += "},\n";
+                        for (int i = 0; i < tag[t]; i++)
+                            result += " ";
+                    }
+                }
+                if (result[result.Length - 1] == '}')
+                {
+                    result = result.Substring(0, result.Length - 1);
+                    result += "\n";
+                    for (int i = 0; i < tag[t]; i++)
+                        result += " ";
+                    result += "}\n";
+                    t--;
+                    for (int i = 0; i < tag[t]; i++)
+                        result += " ";
+                }
+            }
+            return result;
+        }
